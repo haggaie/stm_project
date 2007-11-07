@@ -1,0 +1,3 @@
+[submodule "httpd-2.2.x"]
+	path = httpd-2.2.x
+	url = http://git.haggai.is-a-geek.org/git/httpd-2.2.x.git
