@@ -3,4 +3,4 @@
 	url = http://yasmin.technion.ac.il/ohad/git/httpd-2.2.x.git
 [submodule "tanger"]
 	path = tanger
-	url = http://git.haggai.is-a-geek.org/git/tanger.git
+	url = http://yasmin.technion.ac.il/ohad/git/tanger.git
