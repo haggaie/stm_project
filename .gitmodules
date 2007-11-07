@@ -4,3 +4,6 @@
 [submodule "tanger"]
 	path = tanger
 	url = http://git.haggai.is-a-geek.org/git/tanger.git
+[submodule "tinySTM"]
+	path = tinySTM
+	url = http://git.haggai.is-a-geek.org/git/tinySTM.git
