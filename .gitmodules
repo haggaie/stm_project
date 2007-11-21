@@ -7,3 +7,6 @@
 [submodule "tinySTM"]
 	path = tinySTM
 	url = http://git.haggai.is-a-geek.org/git/tinySTM.git
+[submodule "surge"]
+	path = surge
+	url = http://git.haggai.is-a-geek.org/git/surge.git
