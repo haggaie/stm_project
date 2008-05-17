@@ -23,6 +23,13 @@
 ** C++ Virtual function with TM and OpenMP: TM block calls virtual fucntion 
 */
 
+#ifndef _TM
+#error TM not enabled
+#endif
+#ifndef _OPENMP
+#error OpenMP not enabled
+#endif
+
 #include<stdio.h>
 int xx = 0;
 
@@ -30,7 +37,7 @@ int xx = 0;
 class BaseXXX 
 {
    public:
-__declspec(tm_callable)
+__attribute__((tm_callable))
    virtual void TxnAddOne() 
    {
      xx = xx + 1;
@@ -44,7 +51,7 @@ __declspec(tm_callable)
 class VirtualYYY : public BaseXXX
 {
   public:
-    __declspec(tm_callable) 
+    __attribute__((tm_callable))
     void TxnAddOne()
     {
       xx = xx + 1;

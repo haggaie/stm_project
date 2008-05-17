@@ -56,7 +56,7 @@
 # define SYNC_BEGIN(lock) __tm_atomic {
 # define SYNC_END(lock) }
 # define INIT_SYNC(lock) (void)0
-# define TM_CALLABLE __declspec(tm_callable)
+# define TM_CALLABLE __attribute__((tm_callable))
 # define DECLARE_SYNC(lock) 
 #else
 /* Being compiled without TM */
