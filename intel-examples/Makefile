@@ -11,3 +11,6 @@ all: intel_stmtest_virtual intel_stmtest_hashtable intel_stmtest_counting
 #	icc –Qtm_enabled –Wall intel_stmtest_counting.c –o counting -lpthread
 
 CC=icc -Qtm_enabled -Wall
+
+clean::
+	rm -f intel_stmtest_counting intel_stmtest_hashtable intel_stmtest_virtual
