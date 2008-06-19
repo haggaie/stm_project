@@ -10,7 +10,7 @@ all: intel_stmtest_virtual intel_stmtest_hashtable intel_stmtest_counting
 #counting: intel_stmtest_counting.c
 #	icc –Qtm_enabled –Wall intel_stmtest_counting.c –o counting -lpthread
 
-CC=icc -Qtm_enabled -Wall
+CC=icc -Qtm_enabled -Wall -openmp
 
 clean::
 	rm -f intel_stmtest_counting intel_stmtest_hashtable intel_stmtest_virtual
