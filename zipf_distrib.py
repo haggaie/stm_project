@@ -14,8 +14,12 @@ def denom(s, N):
 def f(k, s, N):
     return k**(-s) / denom(s,N)
 
-def zipfify_list(l, s, target_length):
+def zipfify_list(l, s, target_length = None):
     N = len(l)
+
+    if not target_length:
+        target_length = 1.0 / f(N, s, N)
+
     distrib = ((l[k-1],f(k,s,N)) for k in nat_range(N))
 
     target_list = []
@@ -28,12 +32,14 @@ def zipfify_list(l, s, target_length):
     return target_list
 
 if __name__ == '__main__':
-    if len(sys.argv) < 3:
-        print >>sys.stderr, 'Usage: %s [s] [target_length]' % sys.argv[0]
+    if len(sys.argv) < 2:
+        print >>sys.stderr, 'Usage: %s <s> [<target_length>]' % sys.argv[0]
         sys.exit(1)
 
     s = int(sys.argv[1])
-    target_length = int(sys.argv[2])
+
+    try: target_length = int(sys.argv[2])
+    except IndexError: target_length = None
 
     lines = [ l.rstrip() for l in sys.stdin ]
 
