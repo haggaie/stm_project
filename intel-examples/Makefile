@@ -1,6 +1,6 @@
 CXX=icc -Qtm_enabled -openmp -DDEBUG
 
-all: intel_stmtest_virtual intel_stmtest_hashtable intel_stmtest_counting
+all: intel_stmtest_virtual intel_stmtest_hashtable intel_stmtest_counting check_malloc
 #virtual: intel_stmtest_virtual.cpp
 #	icc –Qtm_enabled intel_stmtest_virtual.cpp –o virtual
 
