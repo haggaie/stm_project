@@ -10,3 +10,6 @@
 [submodule "surge"]
 	path = surge
 	url = http://git.haggai.is-a-geek.org/git/surge.git
+[submodule "httpd-2.2.x.no-transactions"]
+	path = httpd-2.2.x.no-transactions
+	url = http://git.haggai.is-a-geek.org/git/httpd-2.2.x.git
