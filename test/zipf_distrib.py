@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import sys
+import sys,random
 
 DENOM = {}
 
@@ -14,20 +14,27 @@ def denom(s, N):
 def f(k, s, N):
     return k**(-s) / denom(s,N)
 
+def random_with_probability(list):
+    x = random.random()
+    cdf = 0
+    for item,probability in list:
+        cdf += probability
+        if cdf > x:
+            return item
+    return item
+
 def zipfify_list(l, s, target_length = None):
     N = len(l)
 
     if not target_length:
         target_length = 1.0 / f(N, s, N)
 
-    distrib = ((l[k-1],f(k,s,N)) for k in nat_range(N))
+    distrib = [(l[k-1],f(k,s,N)) for k in nat_range(N)]
 
     target_list = []
 
-    for element, probability in distrib:
-        occurences = int(round(target_length * probability))
-        for i in xrange(occurences):
-            target_list.append(element)
+    for i in xrange(target_length):
+        target_list.append(random_with_probability(distrib))
 
     return target_list
 
