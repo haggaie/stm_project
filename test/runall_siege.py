@@ -30,7 +30,7 @@ class Experiment(object):
              } 
         self.main_dir = "~/stm_project_stuff/stm_project/"
         self.schedtool = "~/schedtool-1.3.0/schedtool"
-        self.url_lists = ["man2html-zipf-0.1", "man2html-zipf-1", "man2html-zipf-2"]
+        self.url_lists = ["man2html-zipf-0.1"] + ["man2html-zipf-%d" % i for i in range(1,5)]
         self.options = {
             "no-cache" : { 
                 "apachedir" : os.path.join(self.main_dir, "httpd-2.2.x.no-transactions/"),
