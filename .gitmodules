@@ -13,3 +13,6 @@
 [submodule "httpd-2.2.x.no-transactions"]
 	path = httpd-2.2.x.no-transactions
 	url = http://git.haggai.is-a-geek.org/git/httpd-2.2.x.git
+[submodule "man"]
+	path = man
+	url = http://git.haggai.is-a-geek.org/git/man.git
