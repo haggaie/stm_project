@@ -16,3 +16,6 @@
 [submodule "man"]
 	path = man
 	url = http://git.haggai.is-a-geek.org/git/man.git
+[submodule "doc/presentation"]
+	path = doc/presentation
+	url = http://git.haggai.is-a-geek.org/git/STM-Presentation.git
