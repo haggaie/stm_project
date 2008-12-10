@@ -18,4 +18,4 @@
 	url = http://git.haggai.is-a-geek.org/git/man.git
 [submodule "doc"]
 	path = doc
-	url = /home/haggai/public_git/STM-Project-Docs.git
+	url = http://git.haggai.is-a-geek.org/git/STM-Project-Docs.git
