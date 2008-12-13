@@ -1,5 +1,20 @@
 #!/usr/bin/python
 
+# Client host name
+CLIENT_HOST = "supercore"
+
+# Directory where the project is.
+MAIN_DIR = "~/stm_project_stuff/stm_project/"
+
+# Schedtool binary
+SCHED_TOOL = "~/schedtool-1.3.0/schedtool"
+
+# URL lists (on the client host)
+URL_LISTS = ["man2html-zipf-0.1"] + ["man2html-zipf-%d" % i for i in range(1,5)]
+
+# Minimum and maxmimum number of cores
+MIN_CORES, MAX_CORES = 1,8
+
 import os, csv, sys, time
 from copy import copy
 
@@ -22,15 +37,15 @@ def wait_while_running(cmd):
 class Experiment(object):
     def __init__(self):
         self.siege_options = { 
-            "host" : "supercore",
+            "host" : CLIENT_HOST,
             "cmd" : "siege", "concurrent" : 350, \
             "time" : "30s",
             "options" : "-b -i",
             "output_file" : "~/siege_output.txt"
              } 
-        self.main_dir = "~/stm_project_stuff/stm_project/"
-        self.schedtool = "~/schedtool-1.3.0/schedtool"
-        self.url_lists = ["man2html-zipf-0.1"] + ["man2html-zipf-%d" % i for i in range(1,5)]
+        self.main_dir = MAIN_DIR
+        self.schedtool = SCHED_TOOL
+        self.url_lists = URL_LISTS
         self.options = {
             "no-cache" : { 
                 "apachedir" : os.path.join(self.main_dir, "httpd-2.2.x.no-transactions/"),
@@ -49,7 +64,7 @@ class Experiment(object):
     def test_all(self):
         for url_list in self.url_lists:
             for name in self.options.keys():
-                for num_cores in range(1,9):
+                for num_cores in range(MIN_CORES,MAX_CORES+1):
                     self.test(name, num_cores, url_list)
     
     def test(self, test_name, num_cores, url_list):
