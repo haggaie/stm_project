@@ -1,15 +1,6 @@
 [submodule "httpd-2.2.x"]
 	path = httpd-2.2.x
 	url = http://git.haggai.is-a-geek.org/git/httpd-2.2.x.git
-[submodule "tanger"]
-	path = tanger
-	url = http://git.haggai.is-a-geek.org/git/tanger.git
-[submodule "tinySTM"]
-	path = tinySTM
-	url = http://git.haggai.is-a-geek.org/git/tinySTM.git
-[submodule "surge"]
-	path = surge
-	url = http://git.haggai.is-a-geek.org/git/surge.git
 [submodule "httpd-2.2.x.no-transactions"]
 	path = httpd-2.2.x.no-transactions
 	url = http://git.haggai.is-a-geek.org/git/httpd-2.2.x.git
