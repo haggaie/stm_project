@@ -1,2 +1,2 @@
 # Depends: cache
-LoadModule mem_cache_module /home/haggaie/stm_project_stuff/stm_project/httpd-2.2.x.no-transactions/modules/cache/.libs/mod_mem_cache.so
+LoadModule mem_cache_module /home/hagg/stm_project_stuff/stm_project/httpd-2.2.x.no-transactions/modules/cache/.libs/mod_mem_cache.so

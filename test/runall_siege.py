@@ -1,22 +1,23 @@
 #!/usr/bin/python
 
-# Client host name
-CLIENT_HOST = "supercore"
-
-# Directory where the project is.
-MAIN_DIR = "~/stm_project_stuff/stm_project/"
-
-# Schedtool binary
-SCHED_TOOL = "~/schedtool-1.3.0/schedtool"
-
-# URL lists (on the client host)
-URL_LISTS = ["man2html-zipf-0.1"] + ["man2html-zipf-%d" % i for i in range(1,5)]
-
-# Minimum and maxmimum number of cores
-MIN_CORES, MAX_CORES = 1,8
-
 import os, csv, sys, time
 from copy import copy
+
+# Client host name
+CLIENT_HOST = "trinity"
+
+# Directory where the project is.
+MAIN_DIR = "~/stm_project_stuff/stm_project"
+
+# Schedtool binary
+SCHED_TOOL = "schedtool"
+
+# URL lists (on the client host)
+URL_LISTS = ["man2html-zipf-%d" % i for i in range(1,2)]
+URL_LISTS = [os.path.join(MAIN_DIR, "test/url-lists", file) for file in URL_LISTS]
+
+# Minimum and maxmimum number of cores
+MIN_CORES, MAX_CORES = 1,32
 
 def system(cmd):
     print cmd
@@ -38,7 +39,7 @@ class Experiment(object):
     def __init__(self):
         self.siege_options = { 
             "host" : CLIENT_HOST,
-            "cmd" : "siege", "concurrent" : 350, \
+            "cmd" : "~/local/bin/siege", "concurrent" : 350, \
             "time" : "30s",
             "options" : "-b -i",
             "output_file" : "~/siege_output.txt"
