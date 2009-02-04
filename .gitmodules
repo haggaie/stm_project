@@ -1,12 +1,12 @@
 [submodule "httpd-2.2.x"]
 	path = httpd-2.2.x
-	url = http://git.haggai.is-a-geek.org/git/httpd-2.2.x.git
+	url = git://github.com/haggaie/httpd.git
 [submodule "httpd-2.2.x.no-transactions"]
 	path = httpd-2.2.x.no-transactions
-	url = http://git.haggai.is-a-geek.org/git/httpd-2.2.x.git
+	url = git://github.com/haggaie/httpd.git
 [submodule "man"]
 	path = man
-	url = http://git.haggai.is-a-geek.org/git/man.git
+	url = git://github.com/haggaie/man.git
 [submodule "doc"]
 	path = doc
-	url = http://git.haggai.is-a-geek.org/git/STM-Project-Docs.git
+	url = git://github.com/haggaie/stm_project_docs.git
