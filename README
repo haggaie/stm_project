@@ -1,0 +1,105 @@
+# Transactifying Apache
+
+[Apache][1] is a large-scale industrial multi-process and multi-threaded
+application, which uses lock-based synchronization. We have experimented with
+modifying Apache to employ transactional memory instead of locks, a process we
+refer to as _transactification_; we are not aware of any previous efforts to
+transactify legacy software of such a large scale. We have transactified
+apache's memory cache module `mod_mem_cache` using Intel's experimental [STM
+C/C++ compiler][3].
+
+## Licensing
+
+The scripts of this package as well as the modified version of Apache web
+server, are licensed under the [Apache License][2].  The `siege` and `man2html`
+packages are licensed under the GPL license version 2.
+
+## Downloads
+
+* You can aquire the latest version from the repository at [github][4].
+* Eran, H., Lutzky, O., Guz, Z., and Keidar, I. 2009. [Transactifying Apache's
+  Cache Module][5]. In Proceedings of SYSTOR 2009: the Israeli Experimental
+  Systems Conference (Haifa, Israel). SYSTOR '09. Also available [here][6].
+
+## Directory Structure
+
+After downloading the project's tarball, the project main directory contains the following subdirectories:
+
+* **`httpd-2.2.x`** The modified version of Apache, configured to use transactional memory
+* **`httpd-2.2.x.no-transactions`** Another copy of the modified version of Apache, configured not to use transactional memory. cache-conf An Apache configuration folder configured to use the `man2html` workload, with `mod_mem_cache` enabled. 
+* **`no-cache-conf`** An Apache configuration folder configured to use the `man2html` workload, with `mod_mem_cache` disabled.
+* **`doc`** The documentation of the project, including this document, and the project's presentation. 
+* **`man`** The man program distribution, including the `man2html` cgi script.
+* **`man2html`** symbolic link into `man/man2html/scripts`, reffered to by Apache's configuration folders `cache-conf` and `no-cache-conf`.
+* **`test`** Scripts needed for running the benchmarks.
+  * **`runall_siege.py`** A script that runs all the needed experiments one by one.
+  * **`zipf_distrib.py`** A utility script that takes a list of URLs as an input, and outputs a list where every url appears a number of times according to Zipf distribution. 
+  * **`parse_results.py`** A script to convert the output of siege into a clean CSV file.
+  * **`url-lists`** A subdirectory with already generated URL lists.
+
+## Server Side Installation
+
+The following applies to both versions of apache.
+
+* Install [Intel STM C++ Compiler][3]
+* Install the [schedtool][7] utility for limiting the number of processors Apache will use.
+* Unpack **`apr`** and **`apr-util`** packages into _<httpd>_`/srclib/apr` and
+  _<httpd>_`/srclib/apr-util` respectively. (Where _<httpd>_ is the path of the
+  version you are compiling).  
+* Configure apache using the parameters given in the `configure-cmd` file.
+* Build using the `make` command.
+* Configure and install the `man2html` program as described in `man/INSTALL`.
+
+## Client Side Installation
+
+* Unpack, configure and install [siege][8], from the `siege-2.67.tar.gz` file. Further information is in the package in the `INSTALL` and `README` files.
+* Copy the URL lists from `test/url-lists` to the client machine.
+
+### URL Lists
+
+This section elaborates the generation of URL lists for the client machines.
+
+* The starting point for the process is a file containing a list of unique
+  URLs, each in its own line.
+* Using the `test/zipf_distrib.py` program, a new list is created that is
+  randomly distributed according to the Zipf distribution. The command line for
+  doing that should be: 
+
+        zipf_distrib.py s length < input-file > output-file
+
+  Where `s` is the **s** parameter of the Zipf distribution, `length` is the
+  number of URLs in the output. `input-file` is the input list of URLs.
+  `output-file` is the output result.
+
+## Execution
+
+### Test Configuration
+
+The `test/runall_siege.py` script is intended to run from the server machine, and connect to the client by ssh. To avoid typing the password for every connection it is recommended to set up a public-key login to the client machine.
+
+Before running, the following fields must be set in the script:
+
+* **`CLIENT_HOST`** Client host name.
+* **`MAIN_DIR`** Directory where the project is placed.
+* **`SCHED_TOOL`** Path of the schedtool binary. (Can be just schedtool in case its on the system `PATH`).
+* **`URL_LISTS`** A list of filenames on the client host of the URL list files (Usually there is one for every s value needed in the experiment).
+* **`MIN_CORES,MAX_CORES`** The minimum and maximum number of cores to test.
+
+### Execution
+
+Set the siege output file in `~/.siegerc` on the client machine, by editing the `logfile` entry.
+
+Run the `test/runall_siege.py` script, the results will be saved on the client
+machine in the chosen output file.
+
+Maintained by [Zvika Guz][9]
+
+  [1]: http://www.apache.org/
+  [2]: http://www.apache.org/licenses/LICENSE-2.0 
+  [3]: http://software.intel.com/en-us/articles/pre-release-license-agreement-for-intelreg-c-stm-compiler-prototype-edition-20/
+  [4]: http://github.com/haggaie/stm_project/tree/master
+  [5]: http://doi.acm.org/10.1145/1534530.1534533
+  [6]: http://www.ee.technion.ac.il/matrics/papers/TransactifyingApache.pdf
+  [7]: http://freshmeat.net/projects/schedtool/?topic_id=136
+  [8]: http://www.joedog.org/index/siege-home
+  [9]: mailto:zguz@tx.technion.ac.il
